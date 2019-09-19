@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Page Title</title>
+    {% load staticfiles %}
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'interview/css/candidateprofile.css'%}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header class="navbar-fixed-top" ng-click="removeTimeDrop();">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header DisplayInBlk-xs Float-left-xs">
+                    <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>-->
+                    <button ng-hide="!hasNavMenu &amp;&amp; cP=='t'" type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                        <span class="hamb-top"></span>
+                        <span class="hamb-middle"></span>
+                        <span class="hamb-bottom"></span>
+                    </button>
+                    <!-- <a class="navbar-brand" href="#/" ng-hide="!hasNavMenu"> -->
+                    <a class="navbar-brand" href="#/">
+                        <img src="../../static/interview/images/xcloud-yellow_blk-130-44.svg" style="width: 220px;" class="img-responsive">
+                    </a>
+                    <!-- <a class="navbar-brand" href="#/managejobshm" ng-hide="hasNavMenu">
+                        <img src="app/images/xcloud-yellow_blk-130-44.svg" style="width: 130px;" class="img-responsive" />
+                    </a> -->
+                </div>
+                <!--Header Search, Kindly dont delete-->
+
+                <!--End of Header Search-->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="Icon_right" id="">
+                    <ul class="nav navbar-nav navbar-right Float-right-xs Margin-xs-0 Margin_Right10">
+                        <li class="DisplayInBlk-xs">
+                            <div class="userAc">
+                                <i class="icon-user userC" aria-hidden="true"></i>
+                            </div>
+                            <div class="gear" style="display: none;">
+                                <i class="fa fa-caret-up caret-st" aria-hidden="true"></i>
+                                <ul class="">
+                                    <li class="username">
+                                        <a href="#/changepassword" class="ng-binding">jgreene</a>
+                                    </li>
+                                    <!--  <li class="edit"><a href="javascript:void(0)" >My Account</a></li> -->
+                                    <li ng-show="hasATS" class="edit">
+                                        <a href="#/pending">Pending</a>
+                                    </li>
+                                    <!-- <li class="edit"><a href="javascript:void(0)">Support</a></li> -->
+                                    <li class="dropdown-footer">
+                                        <a class="btnlogout CloseSide" style="cursor: pointer;" ng-click="logOut()">Sign out</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+<!-- <div class="wrapper">
+    we will meet soon
+</div> -->
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 Padding-xs-5 Padding-md-25-50 Padding-sm-25" id="CandProfileModaldiv">
+
+        <!-- top of page-->
+        <div class="modal-header Padding-left-20 no-border margin-bottom-10">
+            <!-- bread crumbs-->
+
+
+
+            <!-- Candidate selected box -->
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 padding0">
+            </div>
+            <!-- ngIf: vm.previousPage !== 'pendingCan' && vm.previousPage !== 'Home' && vm.previousPage !== 'addCandidate' --><div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 padding0 ng-scope" ng-if="vm.previousPage !== 'pendingCan' &amp;&amp; vm.previousPage !== 'Home' &amp;&amp; vm.previousPage !== 'addCandidate'">
+                <!-- ngIf: !(vm.previousPage === 'campDet') -->
+                <div class="ig-control no-margin DisplayInlineBlock pull-right margin-right-10 margin-top-10">
+                    <p class="Font16 no-margin pull-left margin-right-10 ng-binding" ng-hide="vm.previousPage === 'campDet' || vm.previousPage === 'searchCan' || vm.previousPage === 'pendingCan'">
+                        (0 profile<!-- ngIf: vm.selectedProfilesLength > 1 || vm.selectedProfilesLength === 0 --><span ng-if="vm.selectedProfilesLength > 1 || vm.selectedProfilesLength === 0" class="ng-scope">s</span><!-- end ngIf: vm.selectedProfilesLength > 1 || vm.selectedProfilesLength === 0 --> selected)</p>
+                </div>
+            </div><!-- end ngIf: vm.previousPage !== 'pendingCan' && vm.previousPage !== 'Home' && vm.previousPage !== 'addCandidate' -->
+        </div>
+
+
+        <div class="Display_InlineBLk margin-xs-top-30">
+            <!-- Candidate name and joined on date-->
+
+
+            <div class="Left_Tools margin-bottom-20 col-xs-12 col-sm-6 col-md-6 col-lg-4 padding0 no-print">
+                <div class="dropdown pull-right xs-btn-block margin-top-10 no-print">
+
+                    <!-- profile actions button -->
+
+                </div>
+            </div>
+        </div>
+        <!-- =========================  End page heading  =============================== -->
+
+
+        <!-- ngIf: (vm.previousPage == 'reqScr' && vm.previousTab == 'hired') -->
+        <!-- Arrows-->
+
+        <!-- end Arrows-->
+
+
+        <!--Page Content -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding0">
+            <div class="row">
+                <!--Left Area-->
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 Printwidth60">
+
+                    <p>
+                        <!--Contact Info-->
+                        <ats-candidate-contact-info next-previous="vm.nextPrevious" candidate="vm.candidate" refresh-template-view-data="vm.refreshTemplateViewData" enable-sms="vm.enableSms" donot-contact-color="vm.donotContactColor" email-subscription="vm.emailSubscription" sms-subscription="vm.smsSubscription" do-not-contact-chkbx="vm.doNotContactChkbx" class="ng-isolate-scope"><style>
+
+/*
+.candidateProfile-edit-span {
+}
+*/
+
+.candidateProfile-edit-input-email{
+    width: 375px;
+}
+
+.candidateProfile-edit-input-city{
+    width: 180px;
+}
+
+.candidateProfile-edit-input-state{
+    width: 35px;
+}
+
+.candidateProfile-edit-input-zip{
+    width: 65px;
+}
+
+.candidateProfile-edit-input-phone1{
+    width: 180px;
+}
+
+.candidateProfile-edit-input-phone2{
+    width: 180px;
+}
+
+.candidateProfile-edit-icon {
+    float: right;
+    font-size: .95em;
+    color: gray;
+}
+.padRt15{
+    padding-right: 15px !important;
+}
+
+</style>
+
+
+
+<div class="Card_Wrapper no-shadow padding0 ng-scope margin-bottom-25 PrintPadding0" ng-class="vm.sectionCSS" ng-if="vm.showSection">
+    <div class="CardHeader">
+        <h1 class="no-margin Font300">
+            <span style="padding: 20px;
+            margin-right: 10px;">
+            <i class="fa fa-user"></i>
+                John Doe
+            </span>
+            <span class="margin-left-40 Grey_Txt Font16 Font400">
+                Joined on 10/23/2007 8:24 PM
+            </span>
+        </h1>
+    </div>
+
+    <div class="CardBody">
+        <div class="row">
+        <!-- Address - city, state, zip -->
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <h3 class="no-margin Font16 Ellipse Font400">
+
+
+                <i class="fa fa-map-marker RightPadding5Pix"></i>
+
+
+                <span ng-show="vm.candidateContactInfo.country &amp;&amp; vm.country.showMe &amp;&amp; !vm.country.hide" class="ng-binding">
+                    9 Miller Lane
+                    Willingboro, NJ 08046
+                </span>
+
+
+                    <!-- ng-if (!angular.isUndefined(target.candidateCustomDetails[0].candidate.country) && target.candidateCustomDetails[0].candidate.country !== '' && target.candidateCustomDetails[0].candidate.country !== null) { -->
+                    <!-- {{vm.candidateContactInfo.country}} -->
+
+
+                <!--<span class="candidateProfile-edit-span-city">
+                    <input ng-required="true" class="candidateProfile-edit-input-city" type="text" ng-model="vm.candidateContactInfo.city"
+                        ng-show="vm.fieldToEdit === 'address' " ng-keydown="vm.saveField($event, 'address')">
+                </span>
+
+                <span class="candidateProfile-edit-span-state">
+                    <input ng-required="true" class="candidateProfile-edit-input-state" type="text" ng-model="vm.candidateContactInfo.state"
+                        ng-show="vm.fieldToEdit === 'address' " ng-keydown="vm.saveField($event, 'address')">
+                </span>
+
+                <span class="candidateProfile-edit-span-zip">
+                    <input ng-required="true" class="candidateProfile-edit-input-zip" type="text" ng-model="vm.candidateContactInfo.zip"
+                        ng-show="vm.fieldToEdit === 'address' " ng-keydown="vm.saveField($event, 'address')">
+                </span>-->
+                <!-- <a href="javascript:void(0);" class="glyphicon glyphicon-edit candidateProfile-edit-icon" ng-click="vm.editField('address')"  aria-hidden="true"></a>   -->
+            </h3>
+        </div>
+
+        <!-- Phone 1 -->
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 margin-bottom-20">
+            <h3 class="no-margin Font16 Ellipse Font400" ng-show="vm.phone1.showMe &amp;&amp; !vm.phone1.hide">
+                <i class="fa fa-phone RightPadding5Pix "></i>
+                <span>
+                     (987) 676-5628
+                    <!-- ngIf: vm.enableSms -->
+                </span>
+                <!--<span class="candidateProfile-edit-span">
+                    &lt;!&ndash;  value="{{name}}"    &ndash;&gt;
+                    <input ng-required="true" class="candidateProfile-edit-input-phone1" type="text" ng-model="vm.candidateContactInfo.phone1"
+                        ng-show="vm.fieldToEdit === 'phone1' " ng-keydown="vm.saveField($event, 'phone1')">
+                </span>-->
+
+                <!-- <a href="javascript:void(0);" class="glyphicon glyphicon-edit candidateProfile-edit-icon" ng-click="vm.editField('phone1')"  aria-hidden="true"></a>   -->
+            </h3>
+        </div>
+
+        <!-- Email -->
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <h3 class="no-margin Font16 Ellipse Font400">
+
+                <i class="fa fa-envelope RightPadding5Pix"></i>
+                <span ng-show="vm.candidateContactInfo.email.length > 0" class="ng-binding">   <!--ng-dblclick="vm.editField('email')"-->
+                    dummy.test@symphonytalent.com
+                </span>
+
+                <!--<span class="candidateProfile-edit-span">
+                    <input ng-pattern="vm.validEmailAddress" type="email" ng-required="true" class="candidateProfile-edit-input-email" type="text" ng-model="vm.candidateContactInfo.email"
+                        ng-show="vm.fieldToEdit === 'email' " ng-keydown="vm.saveField($event, 'email')">
+                </span>-->
+
+                <!-- <a href="javascript:void(0);" class="glyphicon glyphicon-edit candidateProfile-edit-icon" ng-click="vm.editField('email')"  javascript:void(0) aria-hidden="true"></a> -->
+            </h3>
+        </div>
+
+        <!-- Phone 2 -->
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 margin-bottom-20">
+            <h3 class="no-margin Font16 Ellipse Font400 Ellipse">
+                <i class="fa fa-link RightPadding5Pix"></i>
+
+                <span> <!-- ng-dblclick="vm.editField('phone2')" -->
+                    http://www.example.com/.
+                </span>
+                <!--<span class="candidateProfile-edit-span">
+                    <input ng-pattern="vm.validPhoneNumber" class="candidateProfile-edit-input-phone2" type="text" ng-model="vm.candidateContactInfo.phone2"
+                        ng-show="vm.fieldToEdit === 'phone2' " ng-keydown="vm.saveField($event, 'phone2')">
+                </span>-->
+
+                <!-- <a href="javascript:void(0);" class="glyphicon glyphicon-edit candidateProfile-edit-icon"  ng-click="vm.editField('phone2')" aria-hidden="true"></a>             -->
+            </h3>
+        </div>
+        <div class=" col-xs-12 col-sm-6 col-md-7 col-lg-8 margin-bottom-20">
+            <!-- ngIf: vm.enableSms -->
+        </div>
+
+    </div>
+    </div> <!-- End CardBody -->
+</div><!-- end ngIf: vm.showSection --> <!-- End CardWrapper-->
+</ats-candidate-contact-info>
+                    </p>
+
+                    <p>
+                        <!--Work History-->
+
+
+
+
+
+
+
+
+                    <!-- <p compile="customProfilesDynamicLeftHTML"></p> -->
+                    <div class="Card_Wrapper padding0 no-shadow">
+                        <div class="CardHeader Padding-left-20 Grid-view">
+                            <h3 class="no-margin Font300 Grid_Width_70 Ellipse">Recent Applies</h3>
+                            <!-- <a class="text-right disBlk Grid_Width_30 pull-right margin-top-5 Padding-right-15 Blue_Txt Font500" ng-if="allAppsDetails.length>3 && allAppsDetails.length !== limitValueaad"
+                                                    ng-click="viewAllDetails('aad')">View All</a> -->
+                        </div>
+                        <div class="CardBody ScrollCards" id="applicationflux">
+
+                            <div>
+
+                                <!-- ngRepeat: app in vm.applicationHistory --><div class="Card_Wrapper no-shadow padding0 no-shadow no-margin curPointer PrintPadding0 ng-scope" ng-repeat="app in vm.applicationHistory" style="margin-bottom: 5px !important;">
+                                    <div ng-click="showSQ =! showSQ">
+                                        <!-- " -->
+                                        <div class="padding0 margin-right-10 pull-left DisplayInlineBlock no-print">
+                                            <h4 class="no-margin margin-top-5">
+                                                <i style="font-size: 1.5em;" class="icon-briefcase Blue_Txt"></i>
+                                            </h4>
+                                        </div>
+                                        <div class="col-xs-10 col-sm-8 col-md-7 col-lg-8 padding0">
+                                            <h3 class="no-margin Font14 Font500 Ellipse margin-top-5 ng-binding" title="Registered Nurse [] Open" ng-click="vm.goToReqPage(app.requisition.requisitionId)">
+                                                Registered Nurse
+                                                <span ng-show="app.requisition.requisitionId || app.requisition.atsRequisitionId">
+                                                    [
+                                                    <span ng-show="app.requisition.requisitionId" class="ng-binding">
+                                                        6727
+                                                    </span>
+                                                    <span ng-show="!app.requisition.requisitionId" class="ng-hide">
+                                                        NA
+                                                    </span>
+
+                                                    <span>
+                                                        ,&nbsp;
+                                                    </span>
+
+                                                    <span ng-show="app.requisition.atsRequisitionId" class="ng-binding ng-hide">
+
+                                                    </span>
+                                                    <span ng-show="!app.requisition.atsRequisitionId">
+                                                        NA
+                                                    </span>
+                                                    ]
+                                                </span>
+
+                                                <span ng-class="{'uppercase':true, 'Font13':true, 'margin-left-5':true, 'Green_Txt':app.requisition.status == 'Open', 'Orange_Txt':app.requisition.status == 'Draft' || app.requisition.status == 'Hold' || app.requisition.status == 'Pending' || app.requisition.status == 'Cancelled','Red_Txt':app.requisition.status == 'Closed'}" class="ng-binding uppercase Font13 margin-left-5 Green_Txt">Open</span>
+                                            </h3>
+
+                                            <h3 class="no-margin Font14 Font400 Ellipse Grey_Txt margin-top-5 ng-binding">
+                                                WAMEGO, KS
+                                            </h3>
+                                            <h3 class="no-margin Font14 Font400 Ellipse Grey_Txt margin-top-5 ng-binding">
+                                                Apply Date: 05/30/2019 3:00 PM
+                                            </h3>
+                                            <h3 class="no-margin Font14 Font400 Ellipse margin-top-5 ng-binding" title="">
+                                                <span class="Green_Txt">STEP: </span></h3>
+
+                                            <!-- ngIf: vm.navToAppHistoryPage --><h3 class="no-margin Font13 Font400 Ellipse margin-top-5 uppercase ng-scope" ng-if="vm.navToAppHistoryPage">
+                                                <a ng-click="vm.goToApplicationHistory(app)" class="Blue_Txt Font500">View Application</a>
+                                            </h3><!-- end ngIf: vm.navToAppHistoryPage -->
+                                        </div>
+
+                                        <div class="padding0 pull-right DisplayInlineBlock">
+                                            	<a href="{% url 'interview:goToInstructionsPage' %}" >
+                                            <button class="btn btn-Blue no-margin-right xs-btn-block padding-xs-0 "  type="button">
+                                                Take Assesment
+
+                                            </button>
+                                                </a>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+
+
+                                </div><!-- end ngRepeat: app in vm.applicationHistory --><div class="Card_Wrapper no-shadow padding0 no-shadow no-margin curPointer PrintPadding0 ng-scope" ng-repeat="app in vm.applicationHistory" style="margin-bottom: 5px !important;">
+                                    <div ng-click="showSQ =! showSQ">
+                                        <!-- " -->
+                                        <div class="padding0 margin-right-10 pull-left DisplayInlineBlock no-print">
+                                            <h4 class="no-margin margin-top-5">
+                                                <i style="font-size: 1.5em;" class="icon-briefcase Blue_Txt"></i>
+                                            </h4>
+                                        </div>
+                                        <div class="col-xs-10 col-sm-8 col-md-7 col-lg-8 padding0">
+                                            <h3 class="no-margin Font14 Font500 Ellipse margin-top-5 ng-binding" title="Registered Nurse [] Open" ng-click="vm.goToReqPage(app.requisition.requisitionId)">
+                                                Registered Nurse
+                                                <span ng-show="app.requisition.requisitionId || app.requisition.atsRequisitionId">
+                                                    [
+                                                    <span ng-show="app.requisition.requisitionId" class="ng-binding">
+                                                        6727
+                                                    </span>
+                                                    <span ng-show="!app.requisition.requisitionId" class="ng-hide">
+                                                        NA
+                                                    </span>
+
+                                                    <span>
+                                                        ,&nbsp;
+                                                    </span>
+
+                                                    <span ng-show="app.requisition.atsRequisitionId" class="ng-binding ng-hide">
+
+                                                    </span>
+                                                    <span ng-show="!app.requisition.atsRequisitionId">
+                                                        NA
+                                                    </span>
+                                                    ]
+                                                </span>
+
+                                                <span ng-class="{'uppercase':true, 'Font13':true, 'margin-left-5':true, 'Green_Txt':app.requisition.status == 'Open', 'Orange_Txt':app.requisition.status == 'Draft' || app.requisition.status == 'Hold' || app.requisition.status == 'Pending' || app.requisition.status == 'Cancelled','Red_Txt':app.requisition.status == 'Closed'}" class="ng-binding uppercase Font13 margin-left-5 Green_Txt">Open</span>
+                                            </h3>
+
+                                            <h3 class="no-margin Font14 Font400 Ellipse Grey_Txt margin-top-5 ng-binding">
+                                                WAMEGO, KS
+                                            </h3>
+                                            <h3 class="no-margin Font14 Font400 Ellipse Grey_Txt margin-top-5 ng-binding">
+                                                Apply Date: 06/30/2019 3:00 PM
+                                            </h3>
+                                            <h3 class="no-margin Font14 Font400 Ellipse margin-top-5 ng-binding" title="">
+                                                <span class="Green_Txt">STEP: </span></h3>
+
+                                            <!-- ngIf: vm.navToAppHistoryPage --><h3 class="no-margin Font13 Font400 Ellipse margin-top-5 uppercase ng-scope" ng-if="vm.navToAppHistoryPage">
+                                                <a ng-click="vm.goToApplicationHistory(app)" class="Blue_Txt Font500">View Application</a>
+                                            </h3><!-- end ngIf: vm.navToAppHistoryPage -->
+                                        </div>
+
+                                        <div class="padding0 pull-right DisplayInlineBlock">
+                                            <h4 class="Font13 Font300 Grey_Txt no-margin text-right">Score</h4>
+                                            <h4 class="no-margin text-center Red_Txt Font300 margin-top-5 ng-binding">0&nbsp;
+                                                <i class="fa fa-chevron-down Red_Txt Font12"></i>
+                                            </h4>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+
+
+                                </div><!-- end ngRepeat: app in vm.applicationHistory --><div class="Card_Wrapper no-shadow padding0 no-shadow no-margin curPointer PrintPadding0 ng-scope" ng-repeat="app in vm.applicationHistory" style="margin-bottom: 5px !important;">
+                                    <div ng-click="showSQ =! showSQ">
+                                        <!-- " -->
+                                        <div class="padding0 margin-right-10 pull-left DisplayInlineBlock no-print">
+                                            <h4 class="no-margin margin-top-5">
+                                                <i style="font-size: 1.5em;" class="icon-briefcase Blue_Txt"></i>
+                                            </h4>
+                                        </div>
+                                        <div class="col-xs-10 col-sm-8 col-md-7 col-lg-8 padding0">
+                                            <h3 class="no-margin Font14 Font500 Ellipse margin-top-5 ng-binding" title="Registered Nurse [] Open" ng-click="vm.goToReqPage(app.requisition.requisitionId)">
+                                                Registered Nurse
+                                                <span ng-show="app.requisition.requisitionId || app.requisition.atsRequisitionId">
+                                                    [
+                                                    <span ng-show="app.requisition.requisitionId" class="ng-binding">
+                                                        6727
+                                                    </span>
+                                                    <span ng-show="!app.requisition.requisitionId" class="ng-hide">
+                                                        NA
+                                                    </span>
+
+                                                    <span>
+                                                        ,&nbsp;
+                                                    </span>
+
+                                                    <span ng-show="app.requisition.atsRequisitionId" class="ng-binding ng-hide">
+
+                                                    </span>
+                                                    <span ng-show="!app.requisition.atsRequisitionId">
+                                                        NA
+                                                    </span>
+                                                    ]
+                                                </span>
+
+                                                <span ng-class="{'uppercase':true, 'Font13':true, 'margin-left-5':true, 'Green_Txt':app.requisition.status == 'Open', 'Orange_Txt':app.requisition.status == 'Draft' || app.requisition.status == 'Hold' || app.requisition.status == 'Pending' || app.requisition.status == 'Cancelled','Red_Txt':app.requisition.status == 'Closed'}" class="ng-binding uppercase Font13 margin-left-5 Green_Txt">Open</span>
+                                            </h3>
+
+                                            <h3 class="no-margin Font14 Font400 Ellipse Grey_Txt margin-top-5 ng-binding">
+                                                WAMEGO, KS
+                                            </h3>
+                                            <h3 class="no-margin Font14 Font400 Ellipse Grey_Txt margin-top-5 ng-binding">
+                                                Apply Date: 06/30/2019 5:30 AM
+                                            </h3>
+                                            <h3 class="no-margin Font14 Font400 Ellipse margin-top-5 ng-binding" title="">
+                                                <span class="Green_Txt">STEP: </span></h3>
+
+                                            <!-- ngIf: vm.navToAppHistoryPage --><h3 class="no-margin Font13 Font400 Ellipse margin-top-5 uppercase ng-scope" ng-if="vm.navToAppHistoryPage">
+                                                <a ng-click="vm.goToApplicationHistory(app)" class="Blue_Txt Font500">View Application</a>
+                                            </h3><!-- end ngIf: vm.navToAppHistoryPage -->
+                                        </div>
+
+                                        <div class="padding0 pull-right DisplayInlineBlock">
+                                            <h4 class="Font13 Font300 Grey_Txt no-margin text-right">Score</h4>
+                                            <h4 class="no-margin text-center Red_Txt Font300 margin-top-5 ng-binding">0&nbsp;
+                                                <i class="fa fa-chevron-down Red_Txt Font12"></i>
+                                            </h4>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+
+
+                                </div><!-- end ngRepeat: app in vm.applicationHistory -->
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Left Area-->
+
+
+
+                <!-- Right Area -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 Printwidth40" style="margin-top: 10px;">
+
+                    <!--Recent Applies-->
+ <!-- Right Diiv -->
+<div class="Card_Wrapper padding0 no-shadow">
+
+    <div class="CardBody" >
+
+        <div>
+
+             <img src="../../static/interview/images/team2.jpg" alt="John" style="width:100%">
+
+
+
+        </div>
+    </div>
+</div>
+<div class="Card_Wrapper padding0 no-shadow ng-scope" ng-if="vm.showSection">
+    <div class="CardHeader Padding-left-20">
+        <h3 class="no-margin Font300"><span>About Me</span></h3>
+    </div>
+
+    <!-- ngIf: vm.readHideObj --><div class="CardBody ng-scope" ng-if="vm.readHideObj">
+<h4>Hello, I'm UI/UX Developer</h4>
+<div>
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+</div>
+    </div><!-- end ngIf: vm.readHideObj -->
+</div>
+ <!-- Right Diiv -->
+<!-- End Application History-->
+
+                    <!--Eligibility Status Toggles-->
+                    <!-- <p compile="candidateStatusHTML"></p> -->
+
+
+                    <!--Resume/Attachment-->
+
+
+                    <!--Recent Activity-->
+
+
+
+                    <!--Associated Folders-->
+
+
+                    <!-- Assessments -->
+
+
+                    <!-- Sms UI -->
+
+                    <!--End Sms UI -->
+                </div> <!-- End Right area -->
+
+
+
+
+
+
+
+            </div> <!-- End Page Content Row-->
+        </div> <!-- End Page Content -->
+    </div>
+    <div class="CardBody">
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <h3 class="no-margin Font16 Ellipse Font400">
+
+
+            <i class="fa fa-map-marker RightPadding5Pix"></i>
+
+
+            <span ng-show="vm.candidateContactInfo.country &amp;&amp; vm.country.showMe &amp;&amp; !vm.country.hide" class="ng-binding">
+                9 Miller Lane
+                Willingboro, NJ 08046
+            </span>
+
+
+                <!-- ng-if (!angular.isUndefined(target.candidateCustomDetails[0].candidate.country) && target.candidateCustomDetails[0].candidate.country !== '' && target.candidateCustomDetails[0].candidate.country !== null) { -->
+                <!-- {{vm.candidateContactInfo.country}} -->
+
+
+            <!--<span class="candidateProfile-edit-span-city">
+                <input ng-required="true" class="candidateProfile-edit-input-city" type="text" ng-model="vm.candidateContactInfo.city"
+                    ng-show="vm.fieldToEdit === 'address' " ng-keydown="vm.saveField($event, 'address')">
+            </span>
+
+            <span class="candidateProfile-edit-span-state">
+                <input ng-required="true" class="candidateProfile-edit-input-state" type="text" ng-model="vm.candidateContactInfo.state"
+                    ng-show="vm.fieldToEdit === 'address' " ng-keydown="vm.saveField($event, 'address')">
+            </span>
+
+            <span class="candidateProfile-edit-span-zip">
+                <input ng-required="true" class="candidateProfile-edit-input-zip" type="text" ng-model="vm.candidateContactInfo.zip"
+                    ng-show="vm.fieldToEdit === 'address' " ng-keydown="vm.saveField($event, 'address')">
+            </span>-->
+            <!-- <a href="javascript:void(0);" class="glyphicon glyphicon-edit candidateProfile-edit-icon" ng-click="vm.editField('address')"  aria-hidden="true"></a>   -->
+        </h3>
+    </div>
+</div>
+</div>
+</body>
+</html>
